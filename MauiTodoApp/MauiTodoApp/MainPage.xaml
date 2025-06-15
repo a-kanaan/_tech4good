@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTodoApp.MainPage"
+             x:Name="PageTodo"
+             BindingContext="{x:Reference PageTodo}">
+
+    <Grid RowDefinitions="2*, 2*, 2*, 2*, 8*"
+          MaximumWidthRequest="400"
+          HeightRequest="600">
+
+        <Label Grid.Row="0"
+               Text="Maui Todo"
+               HorizontalTextAlignment="Center"
+               FontSize="Title" />
+
+        <Entry Grid.Row="1"
+               x:Name="enTodoTitle"
+               WidthRequest="300"
+               HorizontalOptions="Center"
+               Margin="0, 5"/>
+
+        <DatePicker Grid.Row="2"
+                    x:Name="dpDueDate"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    Margin="0, 5"/>
+
+        <Button Grid.Row="3"
+                x:Name="btnAddTodo"
+                WidthRequest="300"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Clicked="btnAddTodo_Clicked"
+                Text="Add Todo"
+                Margin="0, 5"/>
+
+        <CollectionView Grid.Row="4"
+                        ItemsSource="{Binding Todos}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid WidthRequest="400"
+                          ColumnDefinitions="2*, 5*"
+                          RowDefinitions="Auto, 20">
+                        <CheckBox Grid.Row="0"
+                                  Grid.Column="0"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="Center" />
+                        <Label Grid.Row="0"
+                               Grid.Column="1" 
+                               Text="{Binding Title}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="StartAndExpand"
+                               FontSize="Medium" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               VerticalOptions="End"
+                               Text="{Binding Due, StringFormat='{0:dd MMM yyyy'}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
